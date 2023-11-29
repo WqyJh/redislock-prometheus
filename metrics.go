@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	DefaultPrefix = "redislock_count"
+	DefaultMetricName = "redislock_count"
 )
 
 const (
@@ -35,10 +35,12 @@ type Collector struct {
 	desc *prometheus.Desc
 }
 
+// NewDefaultCollector creates collector with default metric name redislock_count.
 func NewDefaultCollector() *Collector {
-	return NewCollector(DefaultPrefix)
+	return NewCollector(DefaultMetricName)
 }
 
+// NewCollector creates collector with custom name.
 func NewCollector(name string) *Collector {
 	return &Collector{
 		desc: prometheus.NewDesc(name, "RedisLock stats", []string{"op"}, nil),
